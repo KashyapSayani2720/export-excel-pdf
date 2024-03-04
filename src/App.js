@@ -8,7 +8,11 @@ function App() {
 
   function handleDownloadExcel() {
 
-    axios.get('https://express-api-ten-gilt.vercel.app/api/v1/excel/data')
+    const baseUrl = process.env.REACT_APP_BASE_URL;
+
+    console.log({baseUrl})
+
+    axios.get(`${baseUrl}/v1/excel/data`)
       .then(response => {
         // Process the response data
         const data = response.data;
@@ -99,7 +103,7 @@ function App() {
   });
 
     // Assign totals to grandTotal object
-    grandTotal.Quantity = quantityTotal.toFixed(2);
+    grandTotal.Quantity = quantityTotal + " NOS";
     grandTotal.Value = valueTotal.toFixed(2);
     grandTotal["Gross Total"] = grossTotal.toFixed(2);
     grandTotal.Sales = salesTotal.toFixed(2);
