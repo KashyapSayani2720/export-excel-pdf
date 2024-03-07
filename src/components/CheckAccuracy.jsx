@@ -44,12 +44,14 @@ const CheckAccuracy = () => {
             .then(response => {
               if(response?.data){
                   setAccuracy( response?.data?.accuracy);
+                  toast.current.show({severity:'success', summary: 'Success', detail: "Accuracy percentage found successfully.", life: 3000});
                   // resetForm();
               }
             })
             .catch(error => {
                 console.log("error",error)
                 let err = error?.response?.data?.error;
+                setAccuracy(null);
                 toast.current.show({severity:'error', summary: 'Error', detail: err, life: 3000});
             })
       };
@@ -62,7 +64,7 @@ const CheckAccuracy = () => {
         validateOnBlur: true,
       });
     
-      const { values, errors, handleSubmit, handleChange, touched, resetForm } = formik;
+      const { values, errors, handleSubmit, handleChange, touched } = formik;
 
       const rangeHandler=(lowerRange, upperRange)=>{
         let acc = parseInt(accuracy);
@@ -73,6 +75,7 @@ const CheckAccuracy = () => {
 
   return (
     <div className='accuracy-component'>
+        <h4>Find Address Accuracy</h4>
         <Toast ref={toast} />
       <div>
         <InputComponent
@@ -125,7 +128,7 @@ const CheckAccuracy = () => {
       <ButtonComponent
         onClick={() => handleSubmit()}
         type="submit"
-        label="Check Accuracy"
+        label="Submit"
         className="px-6 py-2 w-full rounded bg-[#1f1f70] text-white"
     />
 

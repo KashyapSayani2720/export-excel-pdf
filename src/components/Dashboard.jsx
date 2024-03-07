@@ -3,10 +3,10 @@ import { Button } from 'primereact/button';
 import axios from 'axios';
 import * as XLSX from 'xlsx/xlsx.mjs';
 import PdfGenerator from './pdf_generator';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     function handleDownloadDayBookExcel() {
 
@@ -63,9 +63,9 @@ const Dashboard = () => {
 
     };
 
-    function checkAccuracyHandler() {
-       return navigate('/check-accuracy')
-    }
+    // function checkAccuracyHandler() {
+    //    return navigate('/check-accuracy')
+    // }
 
     function handleDownloadSalesExcel() {
 
@@ -687,7 +687,7 @@ const Dashboard = () => {
                 <PdfGenerator htmlContent={htmlContent} />
             </div>
             <div className='col-3'>
-            <Button label='Check Acsuracy' onClick={checkAccuracyHandler} />
+            {/* <Button label='Check Accuracy' onClick={checkAccuracyHandler} /> */}
             </div>
         </div>
 </div>
