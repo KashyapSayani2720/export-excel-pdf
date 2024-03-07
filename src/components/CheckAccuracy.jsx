@@ -131,30 +131,30 @@ const CheckAccuracy = () => {
 
     <div className="main">
         <div className="label">
-            <div>High Risk(0)</div>
             <div>Low Risk(100)</div>
+            <div>High Risk(0)</div>
         </div>
 
-        <div className="container">
-            <div className={`range ${rangeHandler(0,20) ? "active" : ""}`}>
-               <div className="text">{accuracy}</div>
-                <div className="box" style={{background: "linear-gradient(to right, red, #FF5733)" }}></div>
-            </div>
-            <div className={`range ${rangeHandler(20,40) ? "active" : ""}`}>
-               <div className="text">{accuracy}</div>
-                <div className="box" style={{background: "linear-gradient(to right, #FF8333, #FFB233)" }}></div>
-            </div>
-            <div className={`range ${rangeHandler(40,60) ? "active" : ""}`}>
-               <div className="text">{accuracy}</div>
-                <div className="box" style={{background: "linear-gradient(to right, #FFE833, #00FF00)" }}></div>
+        <div className="container">    
+            <div className={`range ${rangeHandler(80,100) ? "active" : ""}`}>
+                <div className="text">{accuracy}</div>
+                <div className="box" style={{background: "linear-gradient(to right, #33FFB2, green)" }}></div>
             </div>
             <div className={`range ${rangeHandler(60,80) ? "active" : ""}`}>
                <div className="text">{accuracy}</div>
                 <div className="box" style={{background: "linear-gradient(to right, #33FF57, #33FFB2)" }}></div>
             </div>
-            <div className={`range ${rangeHandler(80,100) ? "active" : ""}`}>
-                <div className="text">{accuracy}</div>
-                <div className="box" style={{background: "linear-gradient(to right, #33FFB2, green)" }}></div>
+            <div className={`range ${rangeHandler(40,60) ? "active" : ""}`}>
+               <div className="text">{accuracy}</div>
+                <div className="box" style={{background: "linear-gradient(to right, #FFE833, #00FF00)" }}></div>
+            </div>
+            <div className={`range ${rangeHandler(20,40) ? "active" : ""}`}>
+               <div className="text">{accuracy}</div>
+                <div className="box" style={{background: "linear-gradient(to right, #FF8333, #FFB233)" }}></div>
+            </div>
+            <div className={`range ${rangeHandler(0,20) ? "active" : ""}`}>
+               <div className="text">{accuracy}</div>
+                <div className="box" style={{background: "linear-gradient(to right, red, #FF5733)" }}></div>
             </div>
         </div>
     </div>
