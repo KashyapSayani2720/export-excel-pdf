@@ -207,35 +207,40 @@ const CheckAccuracy = () => {
           </div>
         </div>
         <div className="col-6">
-          {/* Display names and closest address */}
-          {names.length > 0 && (
-            <div>
-              <h4>Names:</h4>
-              <ul>
-                {names.map((name, index) => (
-                  <li key={index}>{name}</li>
-                ))}
-              </ul>
+            <div className="row">
+              <div className="col-6">
+              {/* Display names and closest address */}
+              {names.length > 0 && (
+                <div>
+                  <h4>Names:</h4>
+                  <ul>
+                    {names.map((name, index) => (
+                      <li key={index}>{name}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
-          )}
-
-          {Object.keys(closestAddress).length > 0 && (
-            <div>
-              <h4>Closest Address:</h4>
-              <div>Name: {closestAddress.Name}</div>
-              <div>Description: {closestAddress.Description}</div>
-              <div>Branch Type: {closestAddress.BranchType}</div>
-              <div>Delivery Status: {closestAddress.DeliveryStatus}</div>
-              <div>Circle: {closestAddress.Circle}</div>
-              <div>District: {closestAddress.District}</div>
-              <div>Division: {closestAddress.Division}</div>
-              <div>Region: {closestAddress.Region}</div>
-              <div>Block: {closestAddress.Block}</div>
-              <div>State: {closestAddress.State}</div>
-              <div>Country: {closestAddress.Country}</div>
-              <div>Pincode: {closestAddress.Pincode}</div>
+            <div className="col-6">
+              {Object.keys(closestAddress).length > 0 && (
+                <div>
+                  <h4>Closest Address:</h4>
+                  <div>Name: {closestAddress.Name}</div>
+                  <div>Description: {closestAddress.Description}</div>
+                  <div>Branch Type: {closestAddress.BranchType}</div>
+                  <div>Delivery Status: {closestAddress.DeliveryStatus}</div>
+                  <div>Circle: {closestAddress.Circle}</div>
+                  <div>District: {closestAddress.District}</div>
+                  <div>Division: {closestAddress.Division}</div>
+                  <div>Region: {closestAddress.Region}</div>
+                  <div>Block: {closestAddress.Block}</div>
+                  <div>State: {closestAddress.State}</div>
+                  <div>Country: {closestAddress.Country}</div>
+                  <div>Pincode: {closestAddress.Pincode}</div>
+                </div>
+              )}
             </div>
-          )}
+          </div>
         </div>
       </div>
     </div>
