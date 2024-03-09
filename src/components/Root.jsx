@@ -4,6 +4,7 @@ import axios from "axios";
 import * as XLSX from "xlsx/xlsx.mjs";
 import PdfGenerator from "./pdf_generator";
 import {htmlContent} from '../common/PdfData';
+import {NavbarComponent} from '../common/NavbarComponent';
 
 const Dashboard = () => {
   const userData = {
@@ -293,28 +294,29 @@ const Dashboard = () => {
   }
 
   return (
+    <>
+    <NavbarComponent/>
     <div className="container">
+      
       <div className="row pt-3">
-        <div className="col-3">
+        <div className="col-4">
           <Button
             label="Download Sales Excel Sheet"
             onClick={handleDownloadSalesExcel}
           />
         </div>
-        <div className="col-3">
+        <div className="col-4">
           <Button
             label="Download Daybook Excel Sheet"
             onClick={handleDownloadDayBookExcel}
           />
         </div>
-        <div className="col-3">
+        <div className="col-4">
           <PdfGenerator htmlContent={htmlContent} />
-        </div>
-        <div className="col-3">
-          {/* <Button label='Check Accuracy' onClick={checkAccuracyHandler} /> */}
         </div>
       </div>
     </div>
+    </>
   );
 };
 
