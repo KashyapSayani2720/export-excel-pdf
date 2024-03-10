@@ -7,54 +7,16 @@ import { htmlContent } from "../common/PdfData";
 import { NavbarComponent } from "../common/NavbarComponent";
 
 const Dashboard = () => {
-  const userData = {
-    companyDetails: {
-      taxInvoiceDate: "25th Feb, 2024",
-      name: "HOBC IMPORT EXPORT PRIVATE LIMITED",
-      address: "7F, Snn Raj Pinnacle ,ITPL Main Road Bengaluru",
-      gstin: "29AAGCH3941L1Z6",
-      stateName: "Karnataka",
-      code: "29",
-      invoiceNumber: "AOM#1361",
-      mode: "",
-      buyerOrderNumber: "",
-      termsOfDelivery: "",
-    },
-    userDetails: {
-      consigneeDetails: {
-        consignee: "Manish Asawa",
-        stateName: "Maharashtra",
-        code: "27",
-      },
-      buyerDetails: {
-        billTo: "Manish Asawa",
-        stateName: "Maharashtra",
-        code: "27",
-      },
-    },
-    invoiceDetails: [
-      {
-        descriptionOfGoods: "",
-        hsn: "",
-        qty: "",
-        rate: "",
-        per: "",
-        dis: "",
-        amount: "",
-      },
-    ],
-  };
+  const baseUrl = "https://express-api-ten-gilt.vercel.app";
 
   function handleDownloadDayBookExcel() {
-    const baseUrl = process.env.REACT_APP_BASE_URL;
-
-    console.log({ baseUrl });
 
     axios
-      .get(`${baseUrl}/v1/excel/day_book`)
+      .get(`${baseUrl}/api/v1/excel/day_book`)
       .then((response) => {
         // Process the response data
         const data = response.data;
+        console.log("data2",data)
 
         // Calculate grand total
         // const grandTotal = calculateGrandTotal(data);
@@ -105,16 +67,13 @@ const Dashboard = () => {
   }
 
   function handleDownloadSalesExcel() {
-    const baseUrl = process.env.REACT_APP_BASE_URL;
-
-    console.log({ baseUrl });
 
     axios
-      .get(`${baseUrl}/v1/excel/sales_register`)
+      .get(`${baseUrl}/api/v1/excel/sales_register`)
       .then((response) => {
         // Process the response data
         const data = response.data;
-
+        console.log("data",data)
         // Calculate grand total
         const grandTotal = calculateGrandTotal(data);
 

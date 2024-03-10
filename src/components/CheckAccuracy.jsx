@@ -26,10 +26,9 @@ const CheckAccuracy = () => {
   });
 
   const onHandleSubmit = (obj) => {
-    const baseUrl = process.env.REACT_APP_BASE_URL;
-    console.log("value", obj);
+    const baseUrl = "https://express-api-ten-gilt.vercel.app";
     axios
-      .post(`${baseUrl}/v1/address/calculate_accuracy`, obj, {
+      .post(`${baseUrl}/api/v1/address/calculate_accuracy`, obj, {
         headers: {
           "Content-Type": "application/json",
         },

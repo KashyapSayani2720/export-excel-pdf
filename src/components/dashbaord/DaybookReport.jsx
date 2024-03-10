@@ -21,7 +21,7 @@ const items = [
     }
 ];
 
-const Content = () => {
+const DaybookReport = () => {
     const baseUrl = "https://express-api-ten-gilt.vercel.app";
     const [ salesReport, setSalesReport ] = useState([]);
     useEffect(()=>{
@@ -201,4 +201,4 @@ const Content = () => {
   )
 }
 
-export default Content
+export default DaybookReport

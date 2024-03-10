@@ -16,9 +16,9 @@ const items = [
     getItem('Dashboard', '1', <DashboardOutlined />),
     getItem('Form', '2', <FileAddOutlined />),
     getItem('List', 'sub1', <TableOutlined />, [
-      getItem('Search List', 'g1', null, [getItem('Option 1', '1'), getItem('Option 2', '2')]),
-      getItem('Data Here', 'g2', null),
-      getItem('Basic List', 'g3', null),
+      getItem('Search List', 'g1', null, [getItem('Option 1', '13'), getItem('Option 2', '14')]),
+      getItem('Sales Report', 'g2', null),
+      getItem('Daybook Report', 'g3', null),
       getItem('Card List', 'g4', null),
     ]),
   

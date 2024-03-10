@@ -7,6 +7,8 @@ PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD
 <title>Accounting Voucher Display</title>
 <meta name='author' content='TallyPrime' />
 <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <style type='text/css'>
     .pagebreak {
         page-break-before: always;
@@ -320,6 +322,62 @@ PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD
         height: 34px;
         border: 1px solid #DEE2E6;
         background-color: #F8F9FA;
+    }
+    .qr-code {
+        max-width: 74px;
+    }
+
+    .footer{
+        padding: 30px 42px;
+        background-color: #E9ECEF;
+        margin-top: 40px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .footer-left{
+        display: flex;
+        gap: 20px;
+    }
+    .hexcode-container{
+        border: 2px dotted #212529;
+        border-radius: 8px;
+        position: relative;
+        padding: 10px 40px;
+    }
+    .hexcode-cut-icon{
+        position: absolute;
+        top: -14%;
+        left: 20%
+    }
+    .hexcode-box{
+        display: flex;
+        flex-direction: column;
+    }
+    .footer-coupon-text{
+        font-size: 20px;
+        font-weight: 400;
+        color: #868E96;
+    }
+    .footer-hexcode-text{
+        font-size: 20px;
+        font-weight: 700;
+        color: #212529;
+    }
+    .footer-right-container{
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 19.2px;
+        color: #212529;
+        width: 225px;
+    }
+    .footer-left-bottom{
+        margin-top: 10px;
+        font-size: 8px;
+        font-weight: 500;
+        color: #212529;
+    }
+    .color-safron{
+        color: #FFBA49;
     }
 </style>
 </head>
@@ -709,7 +767,31 @@ PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD
         </div>
     </div>
 </div>
-<div><img src="footer.png" alt="footer" class="footer-image" /></div>
+<div class="footer">
+    <div class="footer-left-container">
+        <div class="footer-left">
+            <img src="https://chart.googleapis.com/chart?cht=qr&chl=HXYASOA100&chs=160x160&chld=L|0" class="qr-code img-thumbnail img-responsive" />
+            <div class="hexcode-container">
+                <div class="hexcode-cut-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.15179 13.85L19 2M10.3249 10L6.15 6.15M19 18L13 12.4669M7 4C7 5.65685 5.65685 7 4 7C2.34315 7 1 5.65685 1 4C1 2.34315 2.34315 1 4 1C5.65685 1 7 2.34315 7 4ZM7 16C7 17.6569 5.65685 19 4 19C2.34315 19 1 17.6569 1 16C1 14.3431 2.34315 13 4 13C5.65685 13 7 14.3431 7 16Z" stroke="#212529" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                </div>
+                <div class="hexcode-box">
+                    <div class="footer-coupon-text">COUPON</div>
+                    <div class="footer-hexcode-text">HXYASOA100</div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-left-bottom">
+            <div><span>If you've any questions regarding our coupon code, please visit our </span><span class="color-safron">help center.</span></div>
+            <div>All Rights Reserved.</div>
+        </div>
+    </div>
+    <div class="footer-right-container">
+        Unlock exclusive savings with this code the next time you checkout!
+    </div>
+</div>
 </body>
 
 </html>`;

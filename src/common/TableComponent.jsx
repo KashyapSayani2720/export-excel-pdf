@@ -1,43 +1,42 @@
 import React from 'react';
 import { Table } from 'antd';
 import html2pdf from 'html2pdf.js';
-import {htmlContent} from '../common/PdfData';
+import {htmlContentEditor} from './htmlContentEditor';
 
-const vchNoHandler = () => {
-    let element = htmlContent;
 
+const vchNoHandler = (item) => {
+    let element = htmlContentEditor(item);
     html2pdf(element, {
       filename:     'generated.pdf',
       image:        { type: 'jpeg', quality: 2 },
       html2canvas:  { dpi: 192000, letterRendering: true },
       jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
     });
-
-     element = null;
-    };
+    element = null;
+};
 
     const columns = [
         {
         title: 'Date',
-        dataIndex: 'date',
+        dataIndex: 'Date',
         width: "120px",
         render: (text) => <span className='color-blue'>{text}</span>
         },
         {
         title: 'Particular',
-        dataIndex: 'particular',
+        dataIndex: 'Particulars',
         width: "150px" 
         },
         {
         title: 'Vch Type',
-        dataIndex: 'vchType',
+        dataIndex: 'Voucher Type',
         width: "150px"  
         },
         {
         title: 'Vch No.',
-        dataIndex: 'vchNo',
+        dataIndex: 'Voucher No.',
         width: "100px",
-        render: (text) => <span className='color-blue hover-cursor' onClick={()=> {vchNoHandler(text)}}>{text}</span>
+        render: (text, item) => <span className='color-blue hover-cursor' onClick={()=> {vchNoHandler(item)}}>{text}</span>
         },
         {
             title: 'GSTIN/UIN',
@@ -46,73 +45,52 @@ const vchNoHandler = () => {
         },
         {
             title: 'Quantity',
-            dataIndex: 'quantity',
+            dataIndex: 'Quantity',
             width: "70px"  
         },
         {
             title: 'Rates',
-            dataIndex: 'rates',
+            dataIndex: 'Rate',
             width: 100
         },
         {
             title: 'Value',
-            dataIndex: 'value',
+            dataIndex: 'Value',
             width: 100
         },
         {
             title: 'Gross Total',
-            dataIndex: 'grossTotal',
+            dataIndex: 'Gross Total',
             width: "150px"  
         },
         {
             title: 'Sales',
-            dataIndex: 'sales',
+            dataIndex: 'Sales',
             width: 100
         },
         {
             title: 'Discount',
-            dataIndex: 'discount',
+            dataIndex: 'Discount',
             width: 100
         },
         {
             title: 'CGST',
-            dataIndex: 'cgst',
+            dataIndex: 'CGST',
             width: 100
         },
         {
             title: 'SGST',
-            dataIndex: 'sgst',
+            dataIndex: 'SGST',
             width: 100
         },
         {
             title: 'IGST',
-            dataIndex: 'igst',
+            dataIndex: 'IGST',
             width: 100
         },
     ];
 
-    const data = [];
-    for (let i = 0; i < 46; i++) {
-    data.push({
-    key: i,
-    date: `01-Oct-23`,
-    particular: "Piyush Savaliya",
-    vchType: `Credit Note`,
-    vchNo: `AOM#1225`,
-    gstin: "",
-    quantity: "1 NOS",
-    rates: `3502.91/NOS`,
-    value: `3502.91`,
-    grossTotal: "2989.99",
-    sales:'2989.99',
-    discount: "-3600",
-    cgst: "43.54",
-    sgst: "43.54",
-    igst: "43.54"
-    });
-    }
-
-const TableComponent = () => {
+const TableComponent = ({data}) => {
   
     const rowSelection = {
         onChange: (selectedRowKeys, selectedRows) => {
