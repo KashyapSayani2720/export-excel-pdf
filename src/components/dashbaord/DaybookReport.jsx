@@ -5,6 +5,8 @@ import { DownloadOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import axios from "axios";
 import * as XLSX from "xlsx/xlsx.mjs";
+import Navbar from './Navbar';
+import Sidebar from './Sidebar';
 
 const items = [
     {
@@ -14,22 +16,19 @@ const items = [
         title: <a href="">List</a>,
     },
     {
-        title: <a href="">Reporting</a>,
-    },
-    {
-        title: 'ABC Reporting',
+        title: 'Daybook Reporting',
     }
 ];
 
 const DaybookReport = () => {
     const baseUrl = "https://express-api-ten-gilt.vercel.app";
-    const [ salesReport, setSalesReport ] = useState([]);
+    const [ salesReport, setDaybookReport ] = useState([]);
     useEffect(()=>{
         axios
-        .get(`${baseUrl}/api/v1/excel/sales_register`)
+        .get(`${baseUrl}/api/v1/excel/day_book`)
         .then((response) => {
             if(response?.status == 200){
-                setSalesReport(response?.data);
+                setDaybookReport(response?.data);
             }
         })
     },[]);
@@ -166,13 +165,17 @@ const DaybookReport = () => {
 
     
   return (
-    <div className='content-container'>
+    <div>
+        <div><Navbar/></div>
+        <div className='dashboard-content-box'>
+            <div><Sidebar/></div>
+            <div className='content-container'>
         <div className='breadcrum-box'>
             <div>
                 <Breadcrumb items={items} />
             </div>
             <div className='active-breadcrum'>
-                ABC Reporting
+                Daybook Reporting
             </div>
         </div>
         <div className='content-box'>
@@ -196,6 +199,8 @@ const DaybookReport = () => {
             <div>
               <Button type="primary" icon={<DownloadOutlined />} onClick={handleDownloadSalesExcel}>Generate Excel Report</Button>
             </div>
+        </div>
+    </div>
         </div>
     </div>
   )

@@ -9,7 +9,7 @@ const Dashboard = () => {
         <div><Navbar/></div>
         <div className='dashboard-content-box'>
             <div><Sidebar/></div>
-            <div><Content/></div>
+            {/* <div><Content/></div> */}
         </div>
     </div>
   )

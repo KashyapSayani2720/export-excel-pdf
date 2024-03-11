@@ -4,8 +4,8 @@ import { Route, Routes } from 'react-router-dom';
 import  CheckAccuracy from './components/CheckAccuracy.jsx';
 import Root from './components/Root.jsx';
 import Dashboard from './components/dashbaord/Dashboard.jsx';
-import DaybookReport from './components/dashbaord/DaybookReport.jsx';
-import SalesReport from './components/dashbaord/SalesReport.jsx';
+import SalesReport from './components/dashbaord/SalesReport';
+import DaybookReport from './components/dashbaord/DaybookReport';
 
 function App() {
 
@@ -30,20 +30,19 @@ function App() {
                         <CheckAccuracy/>
                     }
                 />
-                 <Route
-                    path="/dashboard/sales-report"
+                <Route
+                    path="/sales-report"
                     element={
                         <SalesReport/>
                     }
                 />
-                 <Route
-                    path="/dashboard/daybook-report"
+                <Route
+                    path="/daybook-report"
                     element={
                         <DaybookReport/>
                     }
                 />
             </Routes>
-           
         </>
     );
 }

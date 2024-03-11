@@ -14,13 +14,9 @@ const items = [
         title: <a href="">List</a>,
     },
     {
-        title: <a href="">Reporting</a>,
-    },
-    {
-        title: 'ABC Reporting',
+        title: 'Sales Reporting',
     }
 ];
-
 const Content = () => {
     const baseUrl = "https://express-api-ten-gilt.vercel.app";
     const [ salesReport, setSalesReport ] = useState([]);
@@ -172,7 +168,7 @@ const Content = () => {
                 <Breadcrumb items={items} />
             </div>
             <div className='active-breadcrum'>
-                ABC Reporting
+                Sales Reporting
             </div>
         </div>
         <div className='content-box'>
