@@ -1,23 +1,23 @@
-export const htmlContentEditor = (item)=>{
+export const htmlContentEditor = (item, qr) => {
+  console.log({ item });
+  let obj = {
+    Date: "1-Jan-24",
+    Particulars: "Jayanth mudili",
+    "Voucher Type": "Sales",
+    "Voucher No.": "AOM#1225",
+    "GSTIN/UIN": "",
+    Quantity: "1 NOS",
+    Rate: "3502.91/NOS",
+    Value: "3502.91",
+    "Gross Total": "2989.99",
+    Sales: "3502.91",
+    Discount: "-600.00",
+    CGST: "43.54",
+    SGST: "43.54",
+    IGST: "",
+  };
 
-    let obj = {
-        "Date": "1-Jan-24",
-        "Particulars": "Jayanth mudili",
-        "Voucher Type": "Sales",
-        "Voucher No.": "AOM#1225",
-        "GSTIN/UIN": "",
-        "Quantity": "1 NOS",
-        "Rate": "3502.91/NOS",
-        "Value": "3502.91",
-        "Gross Total": "2989.99",
-        "Sales": "3502.91",
-        "Discount": "-600.00",
-        "CGST": "43.54",
-        "SGST": "43.54",
-        "IGST": ""
-    }
-
-    return (`<!DOCTYPE html
+  return `<!DOCTYPE html
     PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
     <html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>
     
@@ -474,7 +474,7 @@ export const htmlContentEditor = (item)=>{
                             </span>
                             <span class="personal-details-heading">GSTIN/UIN</span>
                         </div>
-                        <div class="personal-details-data">${item['GSTIN/UIN']}</div>
+                        <div class="personal-details-data">${item["GSTIN/UIN"]}</div>
                     </div>
                     <div class="personal-detail-sub-box">
                         <div class="personal-detail-logo-name">
@@ -789,7 +789,7 @@ export const htmlContentEditor = (item)=>{
     <div class="footer">
         <div class="footer-left-container">
             <div class="footer-left">
-                <img src="https://chart.googleapis.com/chart?cht=qr&chl=HXYASOA100&chs=160x160&chld=L|0" class="qr-code img-thumbnail img-responsive" />
+                <img src="${qr}" class="qr-code img-thumbnail img-responsive" />
                 <div class="hexcode-container">
                     <div class="hexcode-cut-icon">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -813,5 +813,5 @@ export const htmlContentEditor = (item)=>{
     </div>
     </body>
     
-    </html>`)
-}
+    </html>`;
+};
