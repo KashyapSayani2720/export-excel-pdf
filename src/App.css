@@ -201,3 +201,74 @@
 .hover-cursor{
   cursor: pointer;
 }
+
+/* Custom Calender */
+.calendar-header{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+.calendar-buttons{
+  background-color: transparent;
+  border: none;
+}
+.months-heading{
+  font-style: 'roboto';
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+}
+.calendar-card-box{
+  display: flex;
+  gap: 27px;
+  padding: 0px 20px;
+  overflow: hidden;
+
+}
+.day-card{
+  border: 1px solid #CCCCCC;
+  border-radius: 8px;
+  min-width: 60px;
+  min-height: 60px;
+  color: #17191B;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.day-card-day{
+  font-size: 12px;
+  font-weight: 400;
+}
+.day-card-date{
+  font-size: 16px;
+  font-weight: 500;
+}
+.calendar-container{
+  margin-bottom: 20px;
+}
+.calender-month-box{
+  position: relative;
+}
+.calender-month-picker{
+  background-color: transparent;
+  border: none;
+  position: absolute;
+}
+.ant-picker-clear{
+  .anticon-close-circle{
+    display: none;
+  }
+}
+.ant-picker{
+  padding: 0px;
+  margin-top: 1%;
+}
+.ant-picker:focus-within{
+  box-shadow: none !important;
+}
+.skeleton{
+  display: flex;
+  justify-content: center;
+}

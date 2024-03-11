@@ -687,18 +687,7 @@ export const htmlContentEditor = (item, qr) => {
                         <td class="text-right"><span>${item?.Value}</span></td>
                     </tr>
                     <tr>
-                        <td><span>1</span></td>
-                        <td><span>Bange mens Genuine LEather Belt with Crocodile skin pattern Buckle
-                                a House of Brands Company Design Zys&91_q38yns</span></td>
-                        <td><span>71171100</span></td>
-                        <td><span>1 NOS</span></td>
-                        <td><span>${item?.Rate}</span></td>
-                        <td><span>NOS</span></td>
-                        <td><span></span></td>
-                        <td class="text-right"><span>${item?.Value}</span></td>
-                    </tr>
-                    <tr>
-                        <td rowspan="3" colspan="5"><span></span></td>
+                        <td rowspan="5" colspan="5"><span></span></td>
                         <td><span>Subtotal</span></td>
                         <td></td>
                         <td class="text-right"><span>$1233</span></td>
@@ -707,6 +696,16 @@ export const htmlContentEditor = (item, qr) => {
                         <td><span>Discount</span></td>
                         <td></td>
                         <td class="text-right"><span>${item?.Discount}</span></td>
+                    </tr>
+                    <tr>
+                        <td><span>CGST</span></td>
+                        <td></td>
+                        <td class="text-right"><span>${item?.CGST}</span></td>
+                    </tr>
+                    <tr>
+                        <td><span>SGST</span></td>
+                        <td></td>
+                        <td class="text-right"><span>${item?.SGST}</span></td>
                     </tr>
                     <tr>
                         <td><span>IGST</span></td>

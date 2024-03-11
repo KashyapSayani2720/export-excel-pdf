@@ -67,7 +67,7 @@ const DaybookReport = () => {
         // Create a link element
         const link = document.createElement("a");
         link.href = url;
-        link.setAttribute("download", "sales_register.xlsx");
+        link.setAttribute("download", "daybook_report.xlsx");
 
         // Append the link to the document body and click it
         document.body.appendChild(link);
