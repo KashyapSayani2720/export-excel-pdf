@@ -7,6 +7,8 @@ import axios from "axios";
 import * as XLSX from "xlsx/xlsx.mjs";
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
+import html2pdf from 'html2pdf.js';
+import {htmlContentEditor} from '../../common/htmlContentEditor';
 
 const items = [
     {
@@ -23,13 +25,17 @@ const items = [
 const DaybookReport = () => {
     const baseUrl = "https://express-api-ten-gilt.vercel.app";
     const [ salesReport, setDaybookReport ] = useState([]);
+    const [ loader, setLoader ] = useState(false);
     useEffect(()=>{
+        setLoader(true);
         axios
         .get(`${baseUrl}/api/v1/excel/day_book`)
         .then((response) => {
             if(response?.status == 200){
                 setDaybookReport(response?.data);
             }
+        }).catch((err)=>{console.log(err)}).finally(()=>{
+            setLoader(false);
         })
     },[]);
 
@@ -163,6 +169,47 @@ const DaybookReport = () => {
         return buf;
     }
 
+    const vchNoHandler = (item) => {
+        let element = htmlContentEditor(item);
+        html2pdf(element, {
+          filename:     'generated.pdf',
+          image:        { type: 'jpeg', quality: 2 },
+          html2canvas:  { dpi: 192000, letterRendering: true },
+          jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        });
+        element = null;
+    };
+    
+    const columns = [
+        {
+        title: 'Date',
+        dataIndex: 'date',
+        width: "80px",
+        render: (text) => <span className='color-blue'>{text}</span>
+        },
+        {
+        title: 'Particular',
+        dataIndex: 'particulars',
+        width: "110px" 
+        },
+        {
+        title: 'Vch Type',
+        dataIndex: 'vchType',
+        width: "100px"  
+        },
+        {
+        title: 'Vch No.',
+        dataIndex: 'vchNo',
+        width: "100px",
+        render: (text, item) => <span className='color-blue hover-cursor' onClick={()=> {vchNoHandler(item)}}>{text}</span>
+        },
+        {
+            title: 'Credit Amount',
+            dataIndex: 'creditAmount',
+            width: "70px"  
+        }
+    ];
+
     
   return (
     <div>
@@ -179,7 +226,7 @@ const DaybookReport = () => {
             </div>
         </div>
         <div className='content-box'>
-           <TableComponent data={salesReport}/>
+           <TableComponent data={salesReport} columns={columns} width={500} loader={loader}/>
         </div>
         <div className='content-footer'>
             <div>
