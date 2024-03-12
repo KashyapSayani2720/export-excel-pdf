@@ -8,6 +8,7 @@ const TableComponent = ({ data, width, loader, columns }) => {
     onChange: (selectedRowKeys, selectedRows) => {},
   };
 
+
   return (
     <div>
       <CustomCalender/>

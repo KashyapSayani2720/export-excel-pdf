@@ -204,6 +204,11 @@ const DaybookReport = () => {
         render: (text, item) => <span className='color-blue hover-cursor' onClick={()=> {vchNoHandler(item)}}>{text}</span>
         },
         {
+            title: 'Debit Amount',
+            dataIndex: 'debitAmount',
+            width: "70px"  
+        },
+        {
             title: 'Credit Amount',
             dataIndex: 'creditAmount',
             width: "70px"  
