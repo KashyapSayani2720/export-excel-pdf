@@ -272,3 +272,6 @@
   display: flex;
   justify-content: center;
 }
+
+
+@import './common/common.css'
