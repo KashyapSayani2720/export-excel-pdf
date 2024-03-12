@@ -2,3 +2,24 @@
     height: inherit;
     overflow: hidden;
  }
+
+ .calendar-container{
+    margin-bottom: 20px;
+
+    .date-picker-slider{
+        .slick-prev{
+            left: -12px;
+
+            &::before{
+                color: gray;
+            }
+        }
+        .slick-next{
+            right: -12px;
+
+            &::before{
+                color: gray;
+            }
+        }
+    }
+  }
