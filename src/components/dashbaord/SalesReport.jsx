@@ -305,31 +305,33 @@ const SalesReport = () => {
               loader={loader}
             />
           </div>
-          <div className="content-footer">
-            <div>
-              <DatePicker
-                defaultValue={dayjs("02/06/2024", "DD-MM-YYYY")}
-                format={["DD-MM-YYYY"]}
-                className="custom-datepicker"
-              />
+          {!loader && salesReport.length > 0 && (
+            <div className="content-footer">
+              <div>
+                <DatePicker
+                  defaultValue={dayjs("02/06/2024", "DD-MM-YYYY")}
+                  format={["DD-MM-YYYY"]}
+                  className="custom-datepicker"
+                />
+              </div>
+              <div>
+                <DatePicker
+                  defaultValue={dayjs("02/06/2024", "DD-MM-YYYY")}
+                  format={["DD-MM-YYYY"]}
+                  className="custom-datepicker"
+                />
+              </div>
+              <div>
+                <Button
+                  type="primary"
+                  icon={<DownloadOutlined />}
+                  onClick={handleDownloadSalesExcel}
+                >
+                  Generate Excel Report
+                </Button>
+              </div>
             </div>
-            <div>
-              <DatePicker
-                defaultValue={dayjs("02/06/2024", "DD-MM-YYYY")}
-                format={["DD-MM-YYYY"]}
-                className="custom-datepicker"
-              />
-            </div>
-            <div>
-              <Button
-                type="primary"
-                icon={<DownloadOutlined />}
-                onClick={handleDownloadSalesExcel}
-              >
-                Generate Excel Report
-              </Button>
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

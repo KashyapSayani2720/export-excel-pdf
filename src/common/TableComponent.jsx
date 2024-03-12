@@ -12,30 +12,28 @@ const TableComponent = ({ data, width, loader, columns }) => {
   return (
     <div>
       <CustomCalender />
-      {loader ? (
+      {loader && (
         <div className="skeleton">
-          <CustomGridSkeleton rows={10} />
+          <CustomGridSkeleton rows={10} columns={columns.length} />
         </div>
-      ) : (
-        !loader &&
-        data && (
-          <Table
-            rowSelection={rowSelection}
-            columns={columns}
-            dataSource={data || []}
-            scroll={{ x: width }}
-            pagination={{
-              defaultPageSize: 10,
-              showSizeChanger: true,
-              pageSizeOptions: ["10", "20", "30"],
-              showTotal: (total, range) => (
-                <span>
-                  {range[0]}-{range[1]} of {total} items
-                </span>
-              ),
-            }}
-          />
-        )
+      )}
+      {data.length > 0 && !loader && (
+        <Table
+          rowSelection={rowSelection}
+          columns={columns}
+          dataSource={data}
+          scroll={{ x: width }}
+          pagination={{
+            defaultPageSize: 10,
+            showSizeChanger: true,
+            pageSizeOptions: ["10", "20", "30"],
+            showTotal: (total, range) => (
+              <span>
+                {range[0]}-{range[1]} of {total} items
+              </span>
+            ),
+          }}
+        />
       )}
     </div>
   );
