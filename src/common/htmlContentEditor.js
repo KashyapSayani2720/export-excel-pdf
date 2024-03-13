@@ -23,7 +23,7 @@ export const htmlContentEditor = (item, qr) => {
           color = "white";
       }
 
-      let discPer = ((Math.abs(discount) * 100)/rate).toFixed(2);
+      let discPer = ((Math.abs(discount) * 100)/(quantity*rate)).toFixed(2);
       let newRate = value/quantity;
       
       // Generate HTML with the correct background color
@@ -766,7 +766,7 @@ export const htmlContentEditor = (item, qr) => {
                               </span>
                               <span class="personal-details-heading">State Name</span>
                           </div>
-                          <div class="personal-details-data">AOM#1361</div>
+                          <div class="personal-details-data">Maharashtra</div>
                       </div>
                       <div class="personal-detail-sub-box">
                           <div class="personal-detail-logo-name">
