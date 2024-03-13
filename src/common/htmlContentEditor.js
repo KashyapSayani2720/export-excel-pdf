@@ -1,26 +1,34 @@
 export const htmlContentEditor = (item, qr) => {
+ 
   console.log({ item });
-  let obj = {
-    Date: "1-Jan-24",
-    Particulars: "Jayanth mudili",
-    "Voucher Type": "Sales",
-    "Voucher No.": "AOM#1225",
-    "GSTIN/UIN": "",
-    Quantity: "1 NOS",
-    Rate: "3502.91/NOS",
-    Value: "3502.91",
-    "Gross Total": "2989.99",
-    Sales: "3502.91",
-    Discount: "-600.00",
-    CGST: "43.54",
-    SGST: "43.54",
-    IGST: "",
-  };
 
   const grosTotal = Number(item["Gross Total"]);
   const cgst = Number(item.CGST);
   const sgst = Number(item.SGST);
   const igst = Number(item.IGST);
+
+  const cgstAndSgstDetail = `
+                    <tr>
+                        <td style="color:#212529; padding-left:10px; text-align:right;"><span>CGST</span></td>
+                        <td></td>
+                        <td class="text-right"><span>₹${item?.CGST}</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color:#212529; padding-left:10px; text-align:right;"><span>SGST</span></td>
+                        <td></td>
+                        <td class="text-right"><span>₹${item?.SGST}</span></td>
+                    </tr>
+  `
+
+  const igstDetail = `
+                <tr>
+                    <td style="color:#212529; padding-left:10px; text-align:right;"><span>IGST</span></td>
+                    <td></td>
+                    <td class="text-right"><span>₹${item?.IGST}</span></td>
+                </tr>
+  `
+
+
 
   const cgstAndSgstTable = `
     <table>
@@ -104,7 +112,11 @@ export const htmlContentEditor = (item, qr) => {
     `;
   const taxTable = item.IGST ? igstTable : cgstAndSgstTable;
 
-  return `<!DOCTYPE html
+  const taxDetails = item.IGST ? igstDetail : cgstAndSgstDetail;
+
+
+  
+    return `<!DOCTYPE html
       PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
       <html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>
       
@@ -217,6 +229,7 @@ export const htmlContentEditor = (item, qr) => {
               border-radius: 6px;
               display: flex;
               padding: 10px 30px;
+              margin-top:04px;
           }
       
           .personal-detail-inner-box1 {
@@ -279,7 +292,7 @@ export const htmlContentEditor = (item, qr) => {
           }
       
           .billing table td:nth-child(2) {
-              font-size: 8px;
+              font-size: 6px;
               font-weight: 600;
           }
       
@@ -294,21 +307,20 @@ export const htmlContentEditor = (item, qr) => {
           }
       
           .taxable-table {
-              border: 1px dashed black;
+              border: 1px dashed #CED4DA;
               border-radius: 10px;
               margin: 0px 48px;
-              background-color: #DEE2E6;
-      
+              background-color: #f8f9fa;
           }
       
           .taxable-table table {
               width: 100%;
-      
+              box-shadow: 0px 4px 4px 0px #00000040;
           }
       
           .taxable-table table tr,
           .taxable-table table th {
-              border-bottom: 1px solid black;
+              border-bottom: 0.5px solid #CED4DA;
       
           }
       
@@ -316,13 +328,9 @@ export const htmlContentEditor = (item, qr) => {
               border-bottom: none
           }
       
-          .taxable-table table tr td:nth-last-child(${
-            item.IGST ? "-n+2" : "-n+3"
-          }),
-          .taxable-table table th:nth-last-child(${
-            item.IGST ? "-n+2" : "-n+3"
-          }) {
-              border-left: 1px solid black
+          .taxable-table table tr td:nth-last-child(-n+2),
+          .taxable-table table th:nth-last-child(-n+2) {
+              border-left: 1px solid #CED4DA;
           }
       
           .taxable-table table td,
@@ -346,13 +354,13 @@ export const htmlContentEditor = (item, qr) => {
           .inner-table-head,
           .inner-table-body {
               display: flex;
-              justify-content: end;
+              justify-content: center;
               align-items: end;
-              gap: 10px;
+              gap: 15px;
           }
       
           .inner-table-head div {
-              font-size: 8px;
+              font-size: 7px;
               font-weight: 600;
               color: #868E96
           }
@@ -434,13 +442,14 @@ export const htmlContentEditor = (item, qr) => {
               background-color: #F8F9FA;
           }
           .qr-code {
-              max-width: 74px;
+              width: 80px;
+              hegiht:70px;
           }
       
           .footer{
-              padding: 30px 42px;
-              background-color: #E9ECEF;
-              margin-top: 40px;
+              padding: 22px 42px;
+              background-color: #E4F1EE;
+              margin-top: 20px;
               display: flex;
               justify-content: space-between;
           }
@@ -453,10 +462,11 @@ export const htmlContentEditor = (item, qr) => {
               border-radius: 8px;
               position: relative;
               padding: 10px 40px;
+              width: 280px;
           }
           .hexcode-cut-icon{
               position: absolute;
-              top: -14%;
+              top: -10px;
               left: 20%
           }
           .hexcode-box{
@@ -479,6 +489,7 @@ export const htmlContentEditor = (item, qr) => {
               line-height: 19.2px;
               color: #212529;
               width: 225px;
+              padding-right:40px;
           }
           .footer-left-bottom{
               margin-top: 10px;
@@ -489,6 +500,7 @@ export const htmlContentEditor = (item, qr) => {
           .color-safron{
               color: #FFBA49;
           }
+  
       </style>
       </head>
       
@@ -535,9 +547,7 @@ export const htmlContentEditor = (item, qr) => {
                               </span>
                               <span class="personal-details-heading">Name</span>
                           </div>
-                          <div class="personal-details-data">${
-                            item?.Particulars
-                          }</div>
+                          <div class="personal-details-data">${item?.Particulars}</div>
                       </div>
                       <div class="personal-detail-sub-box">
                           <div class="personal-detail-logo-name">
@@ -567,9 +577,7 @@ export const htmlContentEditor = (item, qr) => {
                               </span>
                               <span class="personal-details-heading">GSTIN/UIN</span>
                           </div>
-                          <div class="personal-details-data">${
-                            item["GSTIN/UIN"]
-                          }</div>
+                          <div class="personal-details-data">${item["GSTIN/UIN"]}</div>
                       </div>
                       <div class="personal-detail-sub-box">
                           <div class="personal-detail-logo-name">
@@ -749,88 +757,80 @@ export const htmlContentEditor = (item, qr) => {
                   <thead>
                       <tr>
                           <th><span>SI No.</span></th>
-                          <th class="20vw"><span>Description of Goods</span></th>
-                          <th><span>HAS/SAC</span></th>
-                          <th><span>Qty.</span></th>
-                          <th><span>Rate</span></th>
-                          <th><span>per</span></th>
-                          <th><span>Disc. %</span></th>
-                          <th><span>Amount</span></th>
+                          <th style=""><span>Description of Goods</span></th>
+                          <th style="text-align:end;"><span>HAS/SAC</span></th>
+                          <th style="text-align:end;"><span>Qty.</span></th>
+                          <th style="text-align:end;"><span>Rate</span></th>
+                          <th style="text-align:end;"><span>per</span></th>
+                          <th style="text-align:end;"><span>Disc. %</span></th>
+                          <th style="text-align:end;"><span>Amount</span></th>
                       </tr>
                   </thead>
                   <tbody>
-                      <tr>
-                          <td><span>1</span></td>
-                          <td><span>Bange mens Genuine LEather Belt with Crocodile skin pattern Buckle
+                      <tr style="background-color: #F8F9FA;">
+                          <td style="text-align:center;"><span>1</span></td>
+                          <td style=""><span>Bange mens Genuine LEather Belt with Crocodile skin pattern Buckle
                                   a House of Brands Company Design Zys&91_q38yns</span></td>
-                          <td><span>71171100</span></td>
-                          <td><span>1 NOS</span></td>
-                          <td><span>${item?.Rate}</span></td>
-                          <td><span>NOS</span></td>
+                          <td style="padding-left:10px; text-align:end;"><span>71171100</span></td>
+                          <td style="padding-left:10px; text-align:end;"><span>1 NOS</span></td>
+                          <td style="padding-left:12px; text-align:end;"><span>₹${item?.Rate}</span></td>
+                          <td style="padding-left:12px; text-align:end;"><span>NOS</span></td>
                           <td><span></span></td>
-                          <td class="text-right"><span>${
-                            item?.Value
-                          }</span></td>
+                          <td style="padding-left:15px; text-align:end;"><span>₹${item?.Value}</span></td>
                       </tr>
                       <tr>
-                          <td><span>1</span></td>
-                          <td><span>Bange mens Genuine LEather Belt with Crocodile skin pattern Buckle
+                          <td style="text-align:center;"><span>1</span></td>
+                          <td style=""><span>Bange mens Genuine LEather Belt with Crocodile skin pattern Buckle
                                   a House of Brands Company Design Zys&91_q38yns</span></td>
-                          <td><span>71171100</span></td>
-                          <td><span>1 NOS</span></td>
-                          <td><span>${item?.Rate}</span></td>
-                          <td><span>NOS</span></td>
+                          <td style="padding-left:10px; text-align:end;"><span>71171100</span></td>
+                          <td style="padding-left:10px; text-align:end;"><span>1 NOS</span></td>
+                          <td style="padding-left:12px; text-align:end;"><span>₹${item?.Rate}</span></td>
+                          <td style="padding-left:12px; text-align:end;"><span>NOS</span></td>
                           <td><span></span></td>
-                          <td class="text-right"><span>${
-                            item?.Value
-                          }</span></td>
+                          <td style="padding-left:15px; text-align:end;"><span>₹${item?.Value}</span></td>
+                      </tr>
+                      <tr style="background-color: #F8F9FA;">
+                          <td style="text-align:center;"><span>1</span></td>
+                          <td style=""><span>Bange mens Genuine LEather Belt with Crocodile skin pattern Buckle
+                                  a House of Brands Company Design Zys&91_q38yns</span></td>
+                          <td style="padding-left:10px; text-align:end;"><span>71171100</span></td>
+                          <td style="padding-left:10px; text-align:end;"><span>1 NOS</span></td>
+                          <td style="padding-left:12px; text-align:end;"><span>₹${item?.Rate}</span></td>
+                          <td style="padding-left:12px; text-align:end;"><span>NOS</span></td>
+                          <td><span></span></td>
+                          <td style="padding-left:15px; text-align:end;"><span>₹${item?.Value}</span></td>
                       </tr>
                       <tr>
-                          <td rowspan="5" colspan="5"><span></span></td>
-                          <td><span>Subtotal</span></td>
+                          <td rowspan="3" colspan="5"><span></span></td>
+                          <td style="color:#212529; padding-left:10px; text-align:right;"><span>Subtotal</span></td>
                           <td></td>
-                          <td class="text-right"><span>₹${
+                          <td class="text-right" style="color:#212529"><span>₹${
                             item.Value
                           }</span></td>
                       </tr>
                       <tr>
-                          <td><span>Discount</span></td>
+                          <td style="color:#212529; padding-left:10px; text-align:right;"><span>Discount</span></td>
                           <td></td>
-                          <td class="text-right"><span>${
-                            item?.Discount
-                          }</span></td>
+                          <td class="text-right" style="color:#212529"><span>₹${Math.abs(item?.Discount ?? 0)}</span></td>
                       </tr>
-                      <tr>
-                          <td><span>CGST</span></td>
-                          <td></td>
-                          <td class="text-right"><span>${item?.CGST}</span></td>
-                      </tr>
-                      <tr>
-                          <td><span>SGST</span></td>
-                          <td></td>
-                          <td class="text-right"><span>${item?.SGST}</span></td>
-                      </tr>
-                      <tr>
-                          <td><span>IGST</span></td>
-                          <td></td>
-                          <td class="text-right"><span>${item?.IGST}</span></td>
-                      </tr>
+                      ${taxDetails}
+                    <tr>
                       <tr>
                           <td colspan="3"></td>
                           <td><span>${item.Quantity}</span></td>
                           <td></td>
-                          <td><span>Total</span></td>
+                          <td style="text-align:right; color:#212529;"><span>Total</span></td>
                           <td></td>
                           <td class="text-right"><span class="color-blue">₹${grosTotal}</span></td>
                       </tr>
                       <tr>
-                          <td colspan="2"><span>Amount Chargeable (in words) E. & O.E</span></td>
+                          <td colspan="2" style="color:#212529;"><span>Amount Chargeable (in words) E. & O.E</span></td>
                           <td colspan="6" class="inwords"><span class="color-blue">INR Eight Thousand One Hundred Seventy
                                   Four Only</span>
                           </td>
                       </tr>
                       <tr>
-                          <td colspan="2"><span>Tax Amounts in words</span></td>
+                          <td colspan="2" style="color:#212529;"><span>Tax Amounts in words</span></td>
                           <td colspan="6" class="inwords"><span class="color-blue">INR Two Hundred Forty and Seventy paise
                                   Only</span>
                           </td>
@@ -849,10 +849,10 @@ export const htmlContentEditor = (item, qr) => {
                   </div>
               </div>
               <div class="declaration-right-side declaration-signature-box">
-                  <div>for <span>HOBC IMPORT EXPORT PRIVATE LIMITED</span>
+                  <div style="color:#868E96;">for <span style="color:#495057;">HOBC IMPORT EXPORT PRIVATE LIMITED</span>
                   </div>
                   <div class="declaration-signature-box">
-                      <div class="declaration-signature date">Authorised Signatory</div>
+                      <div class="declaration-signature date" style="color:#212529;">Authorised Signatory</div>
                   </div>
               </div>
           </div>
@@ -885,4 +885,5 @@ export const htmlContentEditor = (item, qr) => {
       </body>
       
       </html>`;
-};
+  };
+  
