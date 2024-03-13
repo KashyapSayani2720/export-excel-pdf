@@ -1,92 +1,71 @@
-import React, { useState } from "react";
-import CalendarHeaderLeft from "./assets/svgs/calendar-header-left.svg";
-import CalendarHeaderRight from "./assets/svgs/calendar-header-right.svg";
+import React, { useEffect, useRef, useState } from "react";
+import { LeftOutlined, RightOutlined, DownOutlined } from "@ant-design/icons";
+
 import { DatePicker } from "antd";
+import moment from "moment";
 import Slider from "react-slick";
-
-function getDaysOfMonth(dateString) {
-  const date = new Date(dateString);
-
-  // Get the month and year
-  const month = date.getMonth();
-  const year = date.getFullYear();
-
-  // Get the number of days in the month
-  const lastDayOfMonth = new Date(year, month + 1, 0);
-  const numberOfDays = lastDayOfMonth.getDate();
-
-  // Create an array to store the day names
-  const daysList = [];
-
-  // Loop through each day of the month and push the day name to the array
-  for (let day = 1; day <= numberOfDays; day++) {
-    const currentDay = new Date(year, month, day);
-    const dayName = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ][currentDay.getDay()];
-    daysList.push({ date: day, dayName });
-  }
-  return daysList;
-}
-
-function getMonthAlphabet(monthNumber) {
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
-  if (monthNumber >= 1 && monthNumber <= 12) {
-    return months[monthNumber - 1];
-  } else if (monthNumber == 0) {
-    return "December";
-  } else if (monthNumber > 12) {
-    return "January";
-  } else {
-    return "Invalid month number";
-  }
-}
+import Icon from "@ant-design/icons";
 
 const CustomCalender = () => {
   const { MonthPicker } = DatePicker;
   const monthFormat = "YYYY";
-  const [month, setMonth] = useState("March");
-  const [year, setYear] = useState(2024);
+  const [month, setMonth] = useState(moment().month());
+  const [year, setYear] = useState(moment().year());
   const [days, setDays] = useState([]);
-  const [previousMonth, setPreviousMonth] = useState("February");
-  const [nextMonth, setNextMonth] = useState("April");
+  const [previousMonth, setPreviousMonth] = useState(null);
+  const [nextMonth, setNextMonth] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const sliderRef = useRef(null);
+
+  useEffect(() => {
+    // Note: months are zero-based in Moment.js (0 = January, 1 = February, etc.)
+    const daysInMonth = moment([year, month || moment().month()]).daysInMonth();
+    let daysOfMonth = [];
+    for (let day = 1; day <= daysInMonth; day++) {
+      const date = moment([year, month || moment().month(), day]);
+      // console.log(date.format("ddd, MMM DD"));
+      daysOfMonth.push({
+        date: date.format("DD"),
+        day: date.format("ddd"),
+        dateString: date,
+      });
+    }
+    console.log({ month, year, daysOfMonth });
+
+    setDays(daysOfMonth);
+    handleGetPreviousNextMonth(month || moment().month());
+  }, [month]);
 
   const yearChangeHandler = (date) => {
-    let month = getMonthAlphabet(date?.$d?.getMonth() + 1);
-    setMonth(month);
-    setYear(date?.$d?.getFullYear());
-    const daysOfMonth = getDaysOfMonth(date);
-    setDays(daysOfMonth);
+    let datString = moment(new Date(date)).format("MMMM YYYY");
+    const month = moment(datString.split(" ")[0], "MMM");
 
-    // Previous month
-    let previousMonth = getMonthAlphabet(date?.$d?.getMonth());
-    setPreviousMonth(previousMonth);
+    // Get the month number (months in Moment.js are 0-indexed)
+    const monthNumber = month.month(); // Adding 1 to match standard month numbering
+    const monthYear = month.year(); // Adding 1 to match standard month numbering
+    setMonth(monthNumber);
+    setYear(monthYear);
+    // setDisplayValue(datString);
 
-    // Next month
-    let nextMonth = getMonthAlphabet(date?.$d?.getMonth() + 2);
-    setNextMonth(nextMonth);
+    // console.log({ monthNumber, monthYear });
+    return date;
   };
-  var settings = {
+
+  const handleGetPreviousNextMonth = (currentMonthNumber) => {
+    var dynamicCurrentMonth = moment().month(currentMonthNumber); // Subtract 1 since month indices start from
+    var nextMonth = dynamicCurrentMonth.clone().add(1, "M");
+    var previousMonth = dynamicCurrentMonth.clone().subtract(1, "M");
+    setPreviousMonth({
+      dateString: previousMonth,
+      monthString: previousMonth.format("MMMM"),
+    });
+    setNextMonth({
+      dateString: nextMonth,
+      monthString: nextMonth.format("MMMM"),
+    });
+  };
+
+  let settings = {
     dots: false,
     infinite: false,
     speed: 500,
@@ -119,40 +98,64 @@ const CustomCalender = () => {
     ],
   };
 
+  const handleNextPreviousMonth = (date) => {
+    setMonth(date.month());
+    setYear(date.year());
+  };
+
   return (
-    <div className="calendar-container">
+    <div className="calendar-container ">
       <div className="calendar-header">
-        <div>
+        <div
+          className="cursor-pointer"
+          onClick={() => handleNextPreviousMonth(previousMonth?.dateString)}
+        >
           <button className="calendar-buttons">
-            <img src={CalendarHeaderLeft} alt="left" width={10} height={8} />
+            <LeftOutlined />
           </button>
-          <span className="months-heading">{previousMonth}</span>
+          <span className="months-heading">{previousMonth?.monthString}</span>
         </div>
         <div className="calender-month-box">
-          {month} {year}{" "}
+          <span className="h6">{moment().month(month).format("MMMM")}</span>{" "}
+          <span className="h6 text-black-50">
+            {moment().month(month).format("YYYY")}
+          </span>
           <MonthPicker
-            format={monthFormat}
             inputReadOnly={true}
             onChange={yearChangeHandler}
-            className="calender-month-picker"
+            suffixIcon={<DownOutlined />}
+            className="calender-month-picker cursor-pointer"
+            format={monthFormat}
           />
         </div>
-        <div>
-          <span className="months-heading">{nextMonth}</span>
+        <div
+          className="cursor-pointer"
+          onClick={() => handleNextPreviousMonth(nextMonth?.dateString)}
+        >
+          <span className="months-heading">{nextMonth?.monthString}</span>
           <button className="calendar-buttons">
-            <img src={CalendarHeaderRight} alt="right" width={10} height={8} />
+            <RightOutlined />
           </button>
         </div>
       </div>
-      <div className="container date-picker-slider">
-        <Slider {...settings}>
-          {days?.map((item) => {
+      <div className="container">
+        <Slider
+          {...settings}
+          centerPadding="10"
+          ref={sliderRef}
+          slidesToScroll={10}
+          className="date-picker-slider"
+        >
+          {days?.map((item, index) => {
             return (
               <>
-                <div className="day-card m-2">
-                  <div className="day-card-day">
-                    {item?.dayName.substring(0, 3)}
-                  </div>
+                <div
+                  className={`${
+                    index === activeIndex ? "active" : ""
+                  } day-card m-2`}
+                  onClick={() => setActiveIndex(index)}
+                >
+                  <div className="day-card-day">{item?.day}</div>
                   <div className="day-card-date">{item?.date}</div>
                 </div>
               </>
