@@ -779,7 +779,7 @@ export const htmlContentEditor = (item, qr) => {
                           <td style="padding-left:15px; text-align:end;"><span>₹${item?.Value}</span></td>
                       </tr>
                       <tr>
-                          <td style="text-align:center;"><span>1</span></td>
+                          <td style="text-align:center;"><span>2</span></td>
                           <td style=""><span>Bange mens Genuine LEather Belt with Crocodile skin pattern Buckle
                                   a House of Brands Company Design Zys&91_q38yns</span></td>
                           <td style="padding-left:10px; text-align:end;"><span>71171100</span></td>
@@ -790,7 +790,7 @@ export const htmlContentEditor = (item, qr) => {
                           <td style="padding-left:15px; text-align:end;"><span>₹${item?.Value}</span></td>
                       </tr>
                       <tr style="background-color: #F8F9FA;">
-                          <td style="text-align:center;"><span>1</span></td>
+                          <td style="text-align:center;"><span>3</span></td>
                           <td style=""><span>Bange mens Genuine LEather Belt with Crocodile skin pattern Buckle
                                   a House of Brands Company Design Zys&91_q38yns</span></td>
                           <td style="padding-left:10px; text-align:end;"><span>71171100</span></td>
