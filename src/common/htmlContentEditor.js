@@ -6,6 +6,42 @@ export const htmlContentEditor = (item, qr) => {
   const cgst = Number(item.CGST);
   const sgst = Number(item.SGST);
   const igst = Number(item.IGST);
+  const discount = Number(item.Discount);
+  const rate = Number(item.Rate);
+  const value = Number(item?.Value);
+  const quantity = Number(item.Quantity.split(" ")[0]);
+
+
+  let invoiceDetailTable = "";
+
+  for(let i = 0; i < quantity; i++) {
+      let color; // Define color variable inside the loop
+      
+      if(i % 2 === 0) {
+          color = "#F8F9FA";
+      } else {
+          color = "white";
+      }
+
+      let discPer = ((Math.abs(discount) * 100)/rate).toFixed(2);
+      let newRate = value/quantity;
+      
+      // Generate HTML with the correct background color
+      const invoiceDataHtml = `<tr style="background-color: ${color};">
+        <td style="text-align:center;"><span>${i+1}</span></td>
+        <td style=""><span>Bange mens Genuine LEather Belt with Crocodile skin pattern Buckle
+                a House of Brands Company Design Zys&91_q38yns</span></td>
+        <td style="padding-left:10px; text-align:end;"><span>71171100</span></td>
+        <td style="padding-left:10px; text-align:end;"><span>1 NOS</span></td>
+        <td style="padding-left:12px; text-align:end;"><span>₹${newRate}</span></td>
+        <td style="padding-left:12px; text-align:end;"><span>NOS</span></td>
+        <td style="padding-left:10px; text-align:end;"><span>${discPer}%</span></td>
+        <td style="padding-left:15px; text-align:end;"><span>₹${newRate}</span></td>
+      </tr>`;
+      
+      invoiceDetailTable += invoiceDataHtml;
+  }
+  
 
   const cgstAndSgstDetail = `
                     <tr>
@@ -613,7 +649,7 @@ export const htmlContentEditor = (item, qr) => {
                       <div class="personal-detail-sub-box">
                           <div class="personal-detail-logo-name"><span class="personal-details-heading">Invoice No</span>
                           </div>
-                          <div class="personal-details-data"><span class="date">AOM#1361</span></div>
+                          <div class="personal-details-data"><span class="date">${item["Voucher No."]}</span></div>
                       </div>
                       <div class="personal-detail-sub-box">
                           <div class="personal-detail-logo-name"><span class="personal-details-heading">Mode/</span><span
@@ -767,39 +803,7 @@ export const htmlContentEditor = (item, qr) => {
                       </tr>
                   </thead>
                   <tbody>
-                      <tr style="background-color: #F8F9FA;">
-                          <td style="text-align:center;"><span>1</span></td>
-                          <td style=""><span>Bange mens Genuine LEather Belt with Crocodile skin pattern Buckle
-                                  a House of Brands Company Design Zys&91_q38yns</span></td>
-                          <td style="padding-left:10px; text-align:end;"><span>71171100</span></td>
-                          <td style="padding-left:10px; text-align:end;"><span>1 NOS</span></td>
-                          <td style="padding-left:12px; text-align:end;"><span>₹${item?.Rate}</span></td>
-                          <td style="padding-left:12px; text-align:end;"><span>NOS</span></td>
-                          <td><span></span></td>
-                          <td style="padding-left:15px; text-align:end;"><span>₹${item?.Value}</span></td>
-                      </tr>
-                      <tr>
-                          <td style="text-align:center;"><span>2</span></td>
-                          <td style=""><span>Bange mens Genuine LEather Belt with Crocodile skin pattern Buckle
-                                  a House of Brands Company Design Zys&91_q38yns</span></td>
-                          <td style="padding-left:10px; text-align:end;"><span>71171100</span></td>
-                          <td style="padding-left:10px; text-align:end;"><span>1 NOS</span></td>
-                          <td style="padding-left:12px; text-align:end;"><span>₹${item?.Rate}</span></td>
-                          <td style="padding-left:12px; text-align:end;"><span>NOS</span></td>
-                          <td><span></span></td>
-                          <td style="padding-left:15px; text-align:end;"><span>₹${item?.Value}</span></td>
-                      </tr>
-                      <tr style="background-color: #F8F9FA;">
-                          <td style="text-align:center;"><span>3</span></td>
-                          <td style=""><span>Bange mens Genuine LEather Belt with Crocodile skin pattern Buckle
-                                  a House of Brands Company Design Zys&91_q38yns</span></td>
-                          <td style="padding-left:10px; text-align:end;"><span>71171100</span></td>
-                          <td style="padding-left:10px; text-align:end;"><span>1 NOS</span></td>
-                          <td style="padding-left:12px; text-align:end;"><span>₹${item?.Rate}</span></td>
-                          <td style="padding-left:12px; text-align:end;"><span>NOS</span></td>
-                          <td><span></span></td>
-                          <td style="padding-left:15px; text-align:end;"><span>₹${item?.Value}</span></td>
-                      </tr>
+                      ${invoiceDetailTable}
                       <tr>
                           <td rowspan="3" colspan="5"><span></span></td>
                           <td style="color:#212529; padding-left:10px; text-align:right;"><span>Subtotal</span></td>
