@@ -116,7 +116,9 @@ const CustomCalender = () => {
           <span className="months-heading">{previousMonth?.monthString}</span>
         </div>
         <div className="calender-month-box">
-          <span className="h6">{moment().month(month).format("MMMM")}</span>{" "}
+          <span className="h6 text-uppercase">
+            {moment().month(month).format("MMMM")}
+          </span>{" "}
           <span className="h6 text-black-50">
             {moment().month(month).format("YYYY")}
           </span>
