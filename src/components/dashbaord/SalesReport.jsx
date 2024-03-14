@@ -282,13 +282,7 @@ const SalesReport = () => {
 
   return (
     <div>
-      <div>
-        <Navbar />
-      </div>
       <div className="dashboard-content-box">
-        <div>
-          <Sidebar />
-        </div>
         <div className="content-container">
           <div className="breadcrum-box">
             <div>

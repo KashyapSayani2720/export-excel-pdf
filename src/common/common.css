@@ -64,3 +64,9 @@
   .cursor-pointer{
     cursor: pointer;
   }
+
+  .v-h-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
