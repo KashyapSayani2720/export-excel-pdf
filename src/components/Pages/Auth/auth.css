@@ -1,3 +1,8 @@
+.auth-container .content{
+    width: 300px;
+}
+
+
 .auth-outer-wrapper{
     height: 100vh;
     width: 100%;

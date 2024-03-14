@@ -27,8 +27,15 @@ const Register = () => {
           span: 18,
         }}
       >
-        <Card>
-          <h2 className="v-h-center mb-3">Register</h2>
+        <Card
+          title="Register"
+          styles={{
+            header: {
+              textAlign: "center",
+              fontSize: 26,
+            },
+          }}
+        >
           <Form.Item
             label="Email"
             name="email"

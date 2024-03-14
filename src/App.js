@@ -7,9 +7,11 @@ import Dashboard from "./components/dashbaord/Dashboard.jsx";
 import SalesReport from "./components/dashbaord/SalesReport";
 import DaybookReport from "./components/dashbaord/DaybookReport";
 import DashBoardLayout from "./common/layout/DashBoardLayout.jsx";
-import Register from "./components/Auth/Register.jsx";
-import ForgotPassword from "./components/Auth/ForgotPassword.jsx";
 import ShopProfile from "./components/dashbaord/ShopProfile.jsx";
+import ResetPassword from "./components/Pages/Auth/ResetPassword.jsx";
+import Login from "./components/Pages/Auth/Login.jsx";
+import ForgotPassword from "./components/Pages/Auth/ForgotPassword.jsx";
+import Register from "./components/Pages/Auth/Register.jsx";
 
 function App() {
   return (
@@ -18,7 +20,8 @@ function App() {
         <Route path="/" element={<Root />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-
+        <Route path="/login" element={<Login />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/dashboard" element={<DashBoardLayout />}>
           <Route path="sales-report" element={<SalesReport />} />
           <Route path="daybook-report" element={<DaybookReport />} />

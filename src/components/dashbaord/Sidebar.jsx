@@ -63,6 +63,7 @@ const items = [
     getItem("Option 1", "11"),
     getItem("Option 2", "12"),
   ]),
+  getItem("Register", "2", <FileAddOutlined />),
 ];
 const Sidebar = () => {
   const navigate = useNavigate();
